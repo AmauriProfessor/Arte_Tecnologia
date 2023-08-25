@@ -3,48 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINHA 1ª INTELIGÊNCIA ARTICIAL</title>
+    <title>MINHA 1ª INTELIGÊNCIA ARTIFICIAL</title>
     <style>
-        /* Estilos aqui como antes */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url(''); /* Imagem de fundo será definida pelo JavaScript */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        input, button {
+            margin: 10px;
+        }
+        #nameDisplay {
+            font-size: 60px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            margin-left: 10px;
+            color: white; /* Cor da fonte */
+        }
+        #questionInput {
+            width: 100%;
+        }
+        #answerArea {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: black; /* Cor da fonte */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div id="nameDisplay"></div>
-        <h1>MINHA 1ª INTELIGÊNCIA ARTICIAL</h1>
-        <p style="text-transform: uppercase; font-weight: bold;">AULA DE ARTES E TECNOLOGIA<br>PROF. AMAURI FREITAS - ARTES</p>
+        <h1>MINHA 1ª INTELIGÊNCIA ARTIFICIAL</h1>
         <input type="text" id="nameInput" placeholder="Seu Nome">
         <input type="text" id="questionInput" placeholder="Faça uma pergunta">
         <input type="text" id="backgroundImageInput" placeholder="image">
         <button id="searchButton">Buscar Resposta</button>
-        <div class="responseArea"></div>
-        <div class="botui-messages-container"></div>
+        <div id="answerArea"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.min.js"></script>
     <script>
         document.getElementById("searchButton").addEventListener("click", function() {
-            const botui = new BotUI('my-bot');
+            var question = document.getElementById("questionInput").value;
+            var answerArea = document.getElementById("answerArea");
+            answerArea.innerHTML = "Buscando resposta...";
 
-            botui.message.add({
-                content: 'Olá! Como posso ajudar?'
-            }).then(function() {
-                return botui.action.text({
-                    action: {
-                        placeholder: 'Digite sua pergunta...'
-                    }
-                });
-            }).then(function(res) {
-                var response = getResponse(res.value);
-                botui.message.add({
-                    content: response
-                });
-            });
+            var response = getResponse(question); // Chamando a função personalizada
+
+            answerArea.innerHTML = response;
         });
 
+        document.getElementById("nameInput").addEventListener("input", function() {
+            var name = document.getElementById("nameInput").value;
+            var nameDisplay = document.getElementById("nameDisplay");
+            nameDisplay.textContent = name;
+        });
+
+        document.getElementById("backgroundImageInput").addEventListener("input", function() {
+            var imageName = document.getElementById("backgroundImageInput").value;
+            document.body.style.backgroundImage = "url('" + imageName + "')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.backgroundPosition = "center";
+        });
+
+        // Função personalizada para as respostas
         function getResponse(question) {
-            // Aqui você pode adicionar chamadas para APIs ou respostas pré-definidas
-            return "A resposta para sua pergunta estaria aqui.";
+            var responses = {
+                "qual é a capital do Brasil": "A capital do Brasil é Brasília.",
+                "quem foi Leonardo da Vinci": "Leonardo da Vinci foi um polímata renascentista italiano.",
+                // Adicione mais pares pergunta-resposta conforme necessário
+            };
+
+            return responses[question] || "Desculpe, não tenho essa informação.";
         }
     </script>
 </body>
