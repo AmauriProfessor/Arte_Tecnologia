@@ -17,6 +17,7 @@
         <input type="text" id="questionInput" placeholder="Faça uma pergunta">
         <input type="text" id="backgroundImageInput" placeholder="image">
         <button id="searchButton">Buscar Resposta</button>
+        <div class="responseArea"></div>
         <div class="botui-messages-container"></div>
     </div>
 
@@ -42,14 +43,8 @@
         });
 
         function getResponse(question) {
-            var responses = {
-                "qual é a capital do Brasil": "A capital do Brasil é Brasília.",
-                "quem foi Leonardo da Vinci": "Leonardo da Vinci foi um polímata renascentista italiano.",
-                "o que é a Teoria da Relatividade": "A Teoria da Relatividade é uma teoria física formulada por Albert Einstein.",
-                // Adicione mais pares pergunta-resposta conforme necessário
-            };
-
-            return responses[question] || "Desculpe, não tenho essa informação.";
+            // Aqui você pode adicionar chamadas para APIs ou respostas pré-definidas
+            return "A resposta para sua pergunta estaria aqui.";
         }
     </script>
 </body>
