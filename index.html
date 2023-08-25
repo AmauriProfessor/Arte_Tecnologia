@@ -3,56 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inteligência Artificial Simulada</title>
+    <title>MINHA 1ª INTELIGÊNCIA ARTICIAL</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px auto;
-            max-width: 500px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        input, button {
-            margin: 10px;
-        }
-        #responseArea {
-            text-align: left;
-            margin-top: 20px;
-        }
+        /* Estilos aqui como antes */
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Inteligência Artificial Simulada</h1>
+        <div id="nameDisplay"></div>
+        <h1>MINHA 1ª INTELIGÊNCIA ARTICIAL</h1>
+        <p style="text-transform: uppercase; font-weight: bold;">AULA DE ARTES E TECNOLOGIA<br>PROF. AMAURI FREITAS - ARTES</p>
+        <input type="text" id="nameInput" placeholder="Seu Nome">
         <input type="text" id="questionInput" placeholder="Faça uma pergunta">
+        <input type="text" id="backgroundImageInput" placeholder="image">
         <button id="searchButton">Buscar Resposta</button>
-        <div id="responseArea"></div>
+        <div class="botui-messages-container"></div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.min.js"></script>
     <script>
         document.getElementById("searchButton").addEventListener("click", function() {
-            var question = document.getElementById("questionInput").value;
-            var responseArea = document.getElementById("responseArea");
-            responseArea.innerHTML = "Buscando resposta...";
+            const botui = new BotUI('my-bot');
 
-            var apiUrl = "http://localhost:5000/get_response?question=" + encodeURIComponent(question);
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    responseArea.innerHTML = data.response;
-                })
-                .catch(error => {
-                    responseArea.innerHTML = "Não foi possível buscar a resposta.";
+            botui.message.add({
+                content: 'Olá! Como posso ajudar?'
+            }).then(function() {
+                return botui.action.text({
+                    action: {
+                        placeholder: 'Digite sua pergunta...'
+                    }
                 });
+            }).then(function(res) {
+                var response = getResponse(res.value);
+                botui.message.add({
+                    content: response
+                });
+            });
         });
+
+        function getResponse(question) {
+            var responses = {
+                "qual é a capital do Brasil": "A capital do Brasil é Brasília.",
+                "quem foi Leonardo da Vinci": "Leonardo da Vinci foi um polímata renascentista italiano.",
+                "o que é a Teoria da Relatividade": "A Teoria da Relatividade é uma teoria física formulada por Albert Einstein.",
+                // Adicione mais pares pergunta-resposta conforme necessário
+            };
+
+            return responses[question] || "Desculpe, não tenho essa informação.";
+        }
     </script>
 </body>
 </html>
