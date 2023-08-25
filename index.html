@@ -3,92 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINHA 1ª INTELIGÊNCIA  ARTICIAL</title>
+    <title>Inteligência Artificial Simulada</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-image: url(''); /* Imagem de fundo será definida pelo JavaScript */
+            background-color: #f0f0f0;
         }
         .container {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: white;
             padding: 20px;
             border-radius: 10px;
-            margin: 20px;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         input, button {
             margin: 10px;
         }
-        #nameDisplay {
-            font-size: 60px;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-        #questionInput {
-            width: 100%;
+        #responseArea {
+            text-align: left;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div id="nameDisplay"></div>
-        <h1>MINHA 1ª INTELIGÊNCIA  ARTICIAL</h1>
-        <p style="text-transform: uppercase; font-weight: bold;">AULA DE ARTES E TECNOLOGIA<br>PROF. AMAURI FREITAS - ARTES</p>
-        <input type="text" id="nameInput" placeholder="Seu Nome">
+        <h1>Inteligência Artificial Simulada</h1>
         <input type="text" id="questionInput" placeholder="Faça uma pergunta">
-        <input type="text" id="backgroundImageInput" placeholder="image">
         <button id="searchButton">Buscar Resposta</button>
-        <div id="answerArea"></div>
-
-        <!-- Código do Google CSE -->
-        <script async src="https://cse.google.com/cse.js?cx=a51473245448145b6"></script>
-        <div class="gcse-search"></div>
-        <!-- Fim do código do Google CSE -->
+        <div id="responseArea"></div>
     </div>
 
     <script>
         document.getElementById("searchButton").addEventListener("click", function() {
             var question = document.getElementById("questionInput").value;
-            var answerArea = document.getElementById("answerArea");
-            answerArea.innerHTML = "Buscando resposta...";
+            var responseArea = document.getElementById("responseArea");
+            responseArea.innerHTML = "Buscando resposta...";
 
-            // Fazer uma solicitação para a Pesquisa do Google
-            var googleSearchUrl = "https://www.google.com/search?q=" + encodeURIComponent(question);
-            fetch(googleSearchUrl)
-                .then(response => response.text())
+            // Fazer uma solicitação para a Wikipedia API
+            var wikipediaApiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=&titles=" + encodeURIComponent(question);
+            fetch(wikipediaApiUrl)
+                .then(response => response.json())
                 .then(data => {
-                    // Extrair o texto da primeira resposta da pesquisa (pode variar)
-                    var startIndex = data.indexOf("<span>") + 6;
-                    var endIndex = data.indexOf("</span>", startIndex);
-                    var answer = data.substring(startIndex, endIndex);
-                    answerArea.innerHTML = answer;
+                    var pages = data.query.pages;
+                    var pageId = Object.keys(pages)[0];
+                    var extract = pages[pageId].extract;
+
+                    if (extract) {
+                        responseArea.innerHTML = extract;
+                    } else {
+                        responseArea.innerHTML = "Desculpe, não encontrei uma resposta para essa pergunta.";
+                    }
                 })
                 .catch(error => {
-                    answerArea.innerHTML = "Não foi possível buscar a resposta.";
+                    responseArea.innerHTML = "Não foi possível buscar a resposta.";
                 });
-        });
-
-        document.getElementById("nameInput").addEventListener("input", function() {
-            var name = document.getElementById("nameInput").value;
-            var nameDisplay = document.getElementById("nameDisplay");
-            nameDisplay.textContent = name;
-        });
-
-        document.getElementById("backgroundImageInput").addEventListener("input", function() {
-            var imageName = document.getElementById("backgroundImageInput").value;
-            document.body.style.backgroundImage = "url('" + imageName + "')";
-            document.body.style.backgroundSize = "cover";
-            document.body.style.backgroundRepeat = "no-repeat";
-            document.body.style.backgroundPosition = "center";
         });
     </script>
 </body>
