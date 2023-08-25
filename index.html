@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINHA 1ª INTELIGÊNCIA  ARTICIAL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url(''); /* Imagem de fundo será definida pelo JavaScript */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        input, button {
+            margin: 10px;
+        }
+        #nameDisplay {
+            font-size: 60px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        #questionInput {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="nameDisplay"></div>
+        <h1>MINHA 1ª INTELIGÊNCIA  ARTICIAL</h1>
+        <p style="text-transform: uppercase; font-weight: bold;">AULA DE ARTES E TECNOLOGIA<br>PROF. AMAURI FREITAS - ARTES</p>
+        <input type="text" id="nameInput" placeholder="Seu Nome">
+        <input type="text" id="questionInput" placeholder="Faça uma pergunta">
+        <input type="text" id="backgroundImageInput" placeholder="image">
+        <button id="searchButton">Buscar Resposta</button>
+        <div id="answerArea"></div>
+    </div>
+
+    <script>
+        document.getElementById("searchButton").addEventListener("click", function() {
+            var question = document.getElementById("questionInput").value;
+            var answerArea = document.getElementById("answerArea");
+            answerArea.innerHTML = "Buscando resposta...";
+
+            // Fazer uma solicitação para a Pesquisa do Google
+            var googleSearchUrl = "https://www.google.com/search?q=" + encodeURIComponent(question);
+            fetch(googleSearchUrl)
+                .then(response => response.text())
+                .then(data => {
+                    // Extrair o texto da primeira resposta da pesquisa (pode variar)
+                    var startIndex = data.indexOf("<span>") + 6;
+                    var endIndex = data.indexOf("</span>", startIndex);
+                    var answer = data.substring(startIndex, endIndex);
+                    answerArea.innerHTML = answer;
+                })
+                .catch(error => {
+                    answerArea.innerHTML = "Não foi possível buscar a resposta.";
+                });
+        });
+
+        document.getElementById("nameInput").addEventListener("input", function() {
+            var name = document.getElementById("nameInput").value;
+            var nameDisplay = document.getElementById("nameDisplay");
+            nameDisplay.textContent = name;
+        });
+
+        document.getElementById("backgroundImageInput").addEventListener("input", function() {
+            var imageName = document.getElementById("backgroundImageInput").value;
+            document.body.style.backgroundImage = "url('" + imageName + "')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.backgroundPosition = "center";
+        });
+    </script>
+</body>
+</html>
