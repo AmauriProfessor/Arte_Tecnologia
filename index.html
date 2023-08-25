@@ -44,7 +44,7 @@
             responseArea.innerHTML = "Buscando resposta...";
 
             // Fazer uma solicitação para a Wikipedia API
-            var wikipediaApiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=&titles=" + encodeURIComponent(question);
+            var wikipediaApiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=&titles=" + question.replace(/\s/g, "%20");
             fetch(wikipediaApiUrl)
                 .then(response => response.json())
                 .then(data => {
