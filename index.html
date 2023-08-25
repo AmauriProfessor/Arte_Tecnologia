@@ -43,20 +43,11 @@
             var responseArea = document.getElementById("responseArea");
             responseArea.innerHTML = "Buscando resposta...";
 
-            // Fazer uma solicitação para a Wikipedia API
-            var wikipediaApiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=&titles=" + question.replace(/\s/g, "%20");
-            fetch(wikipediaApiUrl)
+            var apiUrl = "http://localhost:5000/get_response?question=" + encodeURIComponent(question);
+            fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    var pages = data.query.pages;
-                    var pageId = Object.keys(pages)[0];
-                    var extract = pages[pageId].extract;
-
-                    if (extract) {
-                        responseArea.innerHTML = extract;
-                    } else {
-                        responseArea.innerHTML = "Desculpe, não encontrei uma resposta para essa pergunta.";
-                    }
+                    responseArea.innerHTML = data.response;
                 })
                 .catch(error => {
                     responseArea.innerHTML = "Não foi possível buscar a resposta.";
