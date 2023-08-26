@@ -12,7 +12,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            background-image: url(''); /* Imagem de fundo será definida pelo JavaScript */
+            background-image: none; /* Inicialmente sem imagem de fundo */
         }
         .container {
             background-color: rgba(255, 255, 255, 0.8);
@@ -44,15 +44,18 @@
             margin-top: 20px;
             color: black; /* Cor da fonte */
         }
+        #backgroundImageInput {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div id="nameDisplay"></div>
         <h1>MINHA 1ª INTELIGÊNCIA ARTIFICIAL</h1>
+        <input type="text" id="backgroundImageInput" placeholder="Digite 'image.jpg'">
         <input type="text" id="nameInput" placeholder="Seu Nome">
         <input type="text" id="questionInput" placeholder="Faça uma pergunta">
-        <input type="text" id="backgroundImageInput" placeholder="image">
         <button id="searchButton">Buscar Resposta</button>
         <div id="answerArea"></div>
     </div>
