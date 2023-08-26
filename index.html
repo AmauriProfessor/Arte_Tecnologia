@@ -32,7 +32,7 @@
             font-family: Arial, sans-serif;
             font-weight: bold;
             margin-left: 10px;
-            color: white; /* Cor da fonte */
+            color: black; /* Cor da fonte */
         }
         #questionInput {
             width: 100%;
@@ -74,6 +74,12 @@
             } else {
                 document.body.style.backgroundImage = "none"; /* Remover imagem de fundo */
             }
+        });
+
+        document.getElementById("nameInput").addEventListener("input", function() {
+            var name = document.getElementById("nameInput").value;
+            var nameDisplay = document.getElementById("nameDisplay");
+            nameDisplay.textContent = name;
         });
     </script>
 </body>
