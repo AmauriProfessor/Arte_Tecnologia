@@ -62,5 +62,19 @@
 
     <!-- Referência ao arquivo JavaScript "art_chatbot.js" -->
     <script src="art_chatbot.js"></script>
+    
+    <script>
+        document.getElementById("backgroundImageInput").addEventListener("input", function() {
+            var imageName = document.getElementById("backgroundImageInput").value;
+            if (imageName === "image.jpg") {
+                document.body.style.backgroundImage = "url('" + imageName + "')";
+                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundRepeat = "no-repeat";
+                document.body.style.backgroundPosition = "center";
+            } else {
+                document.body.style.backgroundImage = "none"; /* Remover imagem de fundo */
+            }
+        });
+    </script>
 </body>
 </html>
