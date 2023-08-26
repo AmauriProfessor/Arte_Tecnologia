@@ -57,41 +57,7 @@
         <div id="answerArea"></div>
     </div>
 
-    <script>
-        document.getElementById("searchButton").addEventListener("click", function() {
-            var question = document.getElementById("questionInput").value;
-            var answerArea = document.getElementById("answerArea");
-            answerArea.innerHTML = "Buscando resposta...";
-
-            var response = getResponse(question); // Chamando a função personalizada
-
-            answerArea.innerHTML = response;
-        });
-
-        document.getElementById("nameInput").addEventListener("input", function() {
-            var name = document.getElementById("nameInput").value;
-            var nameDisplay = document.getElementById("nameDisplay");
-            nameDisplay.textContent = name;
-        });
-
-        document.getElementById("backgroundImageInput").addEventListener("input", function() {
-            var imageName = document.getElementById("backgroundImageInput").value;
-            document.body.style.backgroundImage = "url('" + imageName + "')";
-            document.body.style.backgroundSize = "cover";
-            document.body.style.backgroundRepeat = "no-repeat";
-            document.body.style.backgroundPosition = "center";
-        });
-
-        // Função personalizada para as respostas
-        function getResponse(question) {
-            var responses = {
-                "qual é a capital do Brasil": "A capital do Brasil é Brasília.",
-                "quem foi Leonardo da Vinci": "Leonardo da Vinci foi um polímata renascentista italiano.",
-                // Adicione mais pares pergunta-resposta conforme necessário
-            };
-
-            return responses[question] || "Desculpe, não tenho essa informação.";
-        }
-    </script>
+    <!-- Referência ao arquivo JavaScript "art_chatbot.js" -->
+    <script src="art_chatbot.js"></script>
 </body>
 </html>
