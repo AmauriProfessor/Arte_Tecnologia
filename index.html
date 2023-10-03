@@ -1,86 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINHA 1ª INTELIGÊNCIA ARTIFICIAL</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-image: none; /* Inicialmente sem imagem de fundo */
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        input, button {
-            margin: 10px;
-        }
-        #nameDisplay {
-            font-size: 60px;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            margin-left: 10px;
-            color: black; /* Cor da fonte */
-        }
-        #questionInput {
-            width: 100%;
-        }
-        #answerArea {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 20px;
-            color: black; /* Cor da fonte */
-        }
-        #backgroundImageInput {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Inteligência Artificial para Crianças</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="background-image: url('DSC01.jpg');">
     <div class="container">
-        <div id="nameDisplay"></div>
-        <h1>MINHA 1ª INTELIGÊNCIA ARTIFICIAL</h1>
-        <input type="text" id="backgroundImageInput" placeholder="Digite 'image.jpg'">
-        <input type="text" id="nameInput" placeholder="Seu Nome">
-        <input type="text" id="questionInput" placeholder="Faça uma pergunta">
-        <button id="searchButton">Buscar Resposta</button>
-        <div id="answerArea"></div>
+        <h1>Bem-vindo(a) à IA para Crianças</h1>
+        <input type="text" id="childName" placeholder="Digite seu nome">
+        <div class="question-box">
+            <input type="text" id="question" placeholder="Faça sua pergunta à IA">
+            <button onclick="askQuestion()">Perguntar</button>
+        </div>
+        <div id="answer"></div>
     </div>
 
-    <!-- Referência ao arquivo JavaScript "art_chatbot.js" -->
-    <script src="art_chatbot.js"></script>
-    
-    <script>
-        document.getElementById("backgroundImageInput").addEventListener("input", function() {
-            var imageName = document.getElementById("backgroundImageInput").value;
-            if (imageName === "image.jpg") {
-                document.body.style.backgroundImage = "url('" + imageName + "')";
-                document.body.style.backgroundSize = "cover";
-                document.body.style.backgroundRepeat = "no-repeat";
-                document.body.style.backgroundPosition = "center";
-            } else {
-                document.body.style.backgroundImage = "none"; /* Remover imagem de fundo */
-            }
-        });
-
-        document.getElementById("nameInput").addEventListener("input", function() {
-            var name = document.getElementById("nameInput").value;
-            var nameDisplay = document.getElementById("nameDisplay");
-            nameDisplay.textContent = name;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
