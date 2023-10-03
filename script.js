@@ -3,8 +3,13 @@ function askQuestion() {
     const question = document.getElementById('question').value;
     const answer = document.getElementById('answer');
 
+    function askQuestion() {
+    const childName = document.getElementById('childName').value;
+    const question = document.getElementById('question').value;
+    const answer = document.getElementById('answer');
+
     // Consulta a API da Wikipedia
-    fetch(`https://pt.wikipedia.org/api/rest_v1/page/summary/{sua_pergunta}/${question}`)
+    fetch(`https://pt.wikipedia.org/api/rest_v1/page/summary/${question}`)
         .then(response => response.json())
         .then(data => {
             // Verifica se a página foi encontrada
