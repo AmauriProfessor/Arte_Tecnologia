@@ -17,6 +17,25 @@
         <div id="answer"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+    function askQuestion() {
+        const question = document.getElementById("question").value;
+        fetch('/generate_audio', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: question }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Aqui você pode exibir uma mensagem de confirmação se necessário
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    }
+    </script>
 </body>
 </html>
